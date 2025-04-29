@@ -20,11 +20,11 @@ struct DoublyNode {
     DoublyNode* prev = nullptr;
 };
 
-enum SortType {
-    QuickSort,
-    HeapSort,
-    MergeSort,
-    InterpolationSort,
-};
+    enum SortType {
+        QuickSort,
+        HeapSort,
+        MergeSort,
+        InterpolationSort,
+    };
 
 #endif //STRUCTS_H
