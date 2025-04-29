@@ -17,6 +17,7 @@ int main() {
 
 
     // === string example ===
+    std::cout << " === string Example ===\n";
     string a = "Hello";
     string b = " мир!";
     std::cout << (a + b).Split() << '\n'; // ["Hello", "мир!"]
@@ -26,6 +27,7 @@ int main() {
 
 
     // === Queue example ===
+    std::cout << " === Queue Example ===\n";
     Queue<int> queue;
     queue.Enqueue(42);
     queue.Enqueue(11);
@@ -33,5 +35,6 @@ int main() {
 
 
     // === print example ===
+    std::cout << " === print Example ===\n";
     print(42, "hello", 3.14); // 42 hello 3.14
 }

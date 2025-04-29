@@ -50,11 +50,15 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const List<unsigned long long>& list);
     friend std::ostream& operator<<(std::ostream &out, const List<unsigned long>& list);
 
+    friend std::ostream& operator<<(std::ostream &out, const List<unsigned short>& list);
+    friend std::ostream& operator<<(std::ostream &out, const List<short>& list);
+
     friend std::ostream& operator<<(std::ostream &out, const List<long double>& list);
     friend std::ostream& operator<<(std::ostream &out, const List<double>& list);
 
     friend std::ostream& operator<<(std::ostream &out, const List<unsigned char>& list);
     friend std::ostream& operator<<(std::ostream &out, const List<char>& list);
+    friend std::ostream& operator<<(std::ostream &out, const List<bool>& list);
 
     template<typename U>
     friend std::ostream& operator<<(std::ostream &out, const List<List<U>>& list);
