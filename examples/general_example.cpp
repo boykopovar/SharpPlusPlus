@@ -1,4 +1,4 @@
-#include "cs/types.h"
+#include "../cs/types.h"
 
 
 int main() {
@@ -32,6 +32,14 @@ int main() {
     queue.Enqueue(42);
     queue.Enqueue(11);
     std::cout << queue.Dequeue() << ' ' << queue.Dequeue() << "\n\n"; // 42 11
+
+
+    // === BitArray Example ===
+    BitArray bits(5);
+    bits.Set(true);
+    bits[3] = false;
+    bits.Flip();
+    std::cout << bits << std::endl; // 00010
 
 
     // === print example ===

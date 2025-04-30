@@ -8,11 +8,11 @@ List<T>::List(const List &other) : _array(new T[other._capacity]), _size(other._
 }
 
 template <typename T>
-List<T>::List(unsigned long capacity)
+List<T>::List(unsigned long capacity, const bool default_init)
 {
-    this->_array = new T[capacity];
+    this->_array = default_init ? new T[capacity]() : new T[capacity];
     this->_capacity = capacity;
-    this->_size = 0;
+    this->_size = default_init ? capacity : 0;
 }
 
 template<typename T>

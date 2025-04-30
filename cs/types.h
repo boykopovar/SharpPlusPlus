@@ -5,7 +5,7 @@
 #include "src/String/string_include.h"
 #include "src/List/list_include.h"
 #include "src/Queue/queue_include.h"
-// #include "src/BitArray/bitarray_include.h"
+#include "src/BitArray/bitarray_include.h"
 #include "src/Nums.cpp"
 
 

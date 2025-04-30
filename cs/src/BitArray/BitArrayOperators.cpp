@@ -7,12 +7,24 @@ BitArray::BitReference BitArray::operator[](const unsigned long long index) {
 
 bool BitArray::operator[](const unsigned long long index) const {
     if (index>= this->_bitsCount) throw std::out_of_range("BitArray::operator[] const - Index is out of range!");
-    return (this->_numbers[_word_index(index)] >> this->_bit_offset(index)) & 1;
+    const bool bit = (this->_numbers[_word_index(index)] >> this->_bit_offset(index)) & 1;
+    return this->_isReversed ? !bit : bit;
 }
 
-BitArray::BitReference &BitArray::BitReference::operator=(const bool value) {
-    if (value)this->_word |= (1ULL << _offset);
-    else this->_word &= ~(1ULL << _offset);
+BitArray::BitReference &BitArray::BitReference::operator=(bool value) {
+    if (this->_parent._isReversed) value = !value;
+    const bool current_value = (this->_word >> this->_offset) & 1ULL;
+
+    if (current_value == value) return *this;
+
+    if (value) {
+        this->_word |= (1ULL << _offset);
+        this->_parent._trueCount += this->_parent._isReversed ? -1 : 1;
+    }
+    else {
+        this->_word &= ~(1ULL << _offset);
+        this->_parent._trueCount -= this->_parent._isReversed ? -1 : 1;
+    }
     return *this;
 }
 

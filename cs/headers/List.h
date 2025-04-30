@@ -11,7 +11,7 @@ template <typename T>
 class List
 {
 public:
-    explicit List(unsigned long capacity = 0);
+    explicit List(unsigned long capacity = 0, bool default_init = false);
     List(std::initializer_list<T> init);
     List(const List& other);
     ~List();

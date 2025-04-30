@@ -19,14 +19,14 @@ List<T>& List<T>::operator=(const List<T> &other) {
 template <typename T>
 T& List<T>::operator[](long long index)
 {
-    if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("Index is out of range");
+    if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("[List] Index is out of range");
     return _array[index >= 0 ? index : this->_size+index];
 }
 
 template <typename T>
 const T& List<T>::operator[](long long index) const
 {
-    if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("Index is out of range");
+    if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("[List const] Index is out of range");
     return _array[index >= 0 ? index : this->_size+index];
 }
 
