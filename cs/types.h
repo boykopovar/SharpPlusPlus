@@ -7,6 +7,8 @@
 #include "src/Queue/queue_include.h"
 #include "src/BitArray/bitarray_include.h"
 #include "src/Nums.cpp"
+#include "src/LinkedList/linkedlist_include.h"
+#include "src/general/general_include.h"
 
 
 template<typename T>

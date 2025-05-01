@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <ostream>
 #include <sstream>
+#include "../src/general/cout_tools.h"
 #include "structs.h"
 
 
@@ -41,27 +42,8 @@ public:
     List<List<T>> operator%(unsigned long items) const;
     List<List<T>> operator/(unsigned long parts) const;
 
-    friend std::ostream& operator<<(std::ostream &out, const List<long long>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<long>& list);
-
-    friend std::ostream& operator<<(std::ostream &out, const List<unsigned>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<int>& list);
-
-    friend std::ostream& operator<<(std::ostream &out, const List<unsigned long long>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<unsigned long>& list);
-
-    friend std::ostream& operator<<(std::ostream &out, const List<unsigned short>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<short>& list);
-
-    friend std::ostream& operator<<(std::ostream &out, const List<long double>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<double>& list);
-
-    friend std::ostream& operator<<(std::ostream &out, const List<unsigned char>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<char>& list);
-    friend std::ostream& operator<<(std::ostream &out, const List<bool>& list);
-
     template<typename U>
-    friend std::ostream& operator<<(std::ostream &out, const List<List<U>>& list);
+    friend std::ostream& operator<<(std::ostream &out, const List<U>& list);
 
 private:
     T* _array = nullptr;

@@ -1,9 +1,13 @@
 #include "cs/types.h"
 
+
 int main() {
-    BitArray bits = {true, false, false, true};    // 1001
-    bits[2] = true;      // 1011
-    std::cout << bits << std::endl; // 1011
-    std::cout << bits.TrueCount() << std::endl; // 3
-    return 0;
+    // === LinkedList Example ===
+    std::cout<< " === LinkedList Example ===\n";
+    LinkedList<int> linked = {1, 2, 3, 4, 5, 6, 7, 8, 9 ,10};
+
+    linked.Remove(9);
+    linked.AddFirst(3);
+
+    std::cout << linked << "\n\n";
 }
