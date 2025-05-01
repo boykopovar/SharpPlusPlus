@@ -1,3 +1,5 @@
+#include "../../headers/string.h"
+
 
 unsigned long string::Size() const {
     return this->_symbols.Size();

@@ -1,3 +1,5 @@
+#include "../../headers/string.h"
+
 
 string::string(const char* text) {
     this->_symbols = _chars_to_list32(text);

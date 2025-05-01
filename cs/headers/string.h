@@ -1,8 +1,8 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include "../types.h"
 #include "List.h"
+#include "General.h"
 #include "structs.h"
 
 class string {
@@ -41,7 +41,5 @@ private:
 };
 
 typedef string str;
-
-// #include "../src/String/string_inc.h"
 
 #endif //STRING_H

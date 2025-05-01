@@ -1,7 +1,5 @@
 #ifndef BITARRAY_H
 #define BITARRAY_H
-
-#include "../types.h"
 #include "string.h"
 
 class BitArray {
@@ -54,7 +52,5 @@ private:
 
     List<unsigned long long> _numbers;
 };
-
-// #include "../src/BitArray/bitarray_inc.h"
 
 #endif //BITARRAY_H

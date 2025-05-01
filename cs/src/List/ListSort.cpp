@@ -1,27 +1,28 @@
+#include "../../headers/List.h"
 
 template<>
-void List<int>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<int>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<long>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<long>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<long long>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<long long>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<unsigned>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<unsigned>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<unsigned long long>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<unsigned long long>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<double>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<double>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<>
-void List<long double>::Sort(const SortType sort_type) { _sort(sort_type); }
+inline void List<long double>::Sort(const SortType sort_type) { _sort(sort_type); }
 
 template<typename T>
-void List<T>::_sort(const SortType sort_type) {
+inline void List<T>::_sort(const SortType sort_type) {
     switch (sort_type) {
         case QuickSort: _quickSort(); break;
         case HeapSort: _heapSort(); break;
@@ -31,7 +32,7 @@ void List<T>::_sort(const SortType sort_type) {
 }
 
 template<typename T>
-void List<T>::_quickSort(const unsigned long left, long long right) {
+inline void List<T>::_quickSort(const unsigned long left, long long right) {
     if (right == -1) right = this->_size - 1;
     if (left >= right || this->_size <= 1) return;
 
@@ -52,14 +53,14 @@ void List<T>::_quickSort(const unsigned long left, long long right) {
 }
 
 template<typename T>
-void List<T>::_swap(long long index1, long long index2) {
+inline void List<T>::_swap(long long index1, long long index2) {
     T buf = this->_array[index1];
     this->_array[index1] = this->_array[index2];
     this->_array[index2] = buf;
 }
 
 template<typename T>
-void List<T>::_heapSort() {
+inline void List<T>::_heapSort() {
     if (this->_size <= 1) return;
 
     for (long long i = this->_size / 2 - 1; i >= 0; --i) {
@@ -73,7 +74,7 @@ void List<T>::_heapSort() {
 }
 
 template<typename T>
-void List<T>::_heapify(const long long i, const long long size) {
+inline void List<T>::_heapify(const long long i, const long long size) {
     long long max = i;
     long long left = 2 * i + 1;
     long long right = 2 * i + 2;
@@ -88,7 +89,7 @@ void List<T>::_heapify(const long long i, const long long size) {
 
 
 template<typename T>
-void List<T>::_mergeSort() {
+inline void List<T>::_mergeSort() {
     if (this->_size <= 1) return;
     T *temp = new T[this->_size];
     this->_mergeSort(0, this->_size - 1, temp);
@@ -96,7 +97,7 @@ void List<T>::_mergeSort() {
 }
 
 template<typename T>
-void List<T>::_mergeSort(const long long left, const long long right, T *temp) {
+inline void List<T>::_mergeSort(const long long left, const long long right, T *temp) {
     if (left >= right) return;
     const long long mid = (left + right) / 2;
     _mergeSort(left, mid, temp);
@@ -113,7 +114,7 @@ void List<T>::_mergeSort(const long long left, const long long right, T *temp) {
 }
 
 template<typename T>
-void List<T>::_interpolationSort() {
+inline void List<T>::_interpolationSort() {
     if (this->_size <= 1) return;
 
     T min = this->_array[0];

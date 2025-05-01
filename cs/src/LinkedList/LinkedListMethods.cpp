@@ -1,14 +1,14 @@
 
 
 template<typename T>
-LinkedList<T>::LinkedList(std::initializer_list<T> init) {
+inline LinkedList<T>::LinkedList(std::initializer_list<T> init) {
     for (unsigned long long i = 0; i < init.size(); ++i) {
         this->AddLast(init.begin()[i]);
     }
 }
 
 template<typename T>
-LinkedList<T>::~LinkedList() {
+inline LinkedList<T>::~LinkedList() {
     auto current = this->_head;
     while (current != nullptr) {
         auto next = current->next;
@@ -22,7 +22,7 @@ LinkedList<T>::~LinkedList() {
 }
 
 template<typename T>
-void LinkedList<T>::AddFirst(T object) {
+inline void LinkedList<T>::AddFirst(T object) {
     auto new_node = new DoublyNode<T>;
     new_node->data = object;
     new_node->next = this->_head;
@@ -31,7 +31,7 @@ void LinkedList<T>::AddFirst(T object) {
 }
 
 template<typename T>
-void LinkedList<T>::AddLast(T object) {
+inline void LinkedList<T>::AddLast(T object) {
     auto new_node = new DoublyNode<T>;
     new_node->data = object;
     new_node->prev = this->_tail;
@@ -42,7 +42,7 @@ void LinkedList<T>::AddLast(T object) {
 }
 
 template<typename T>
-bool LinkedList<T>::RemoveFirst() {
+inline bool LinkedList<T>::RemoveFirst() {
     if (this->_head == nullptr) return false;
     delete this->_head;
     this->_head = this->_head->next;
@@ -52,7 +52,7 @@ bool LinkedList<T>::RemoveFirst() {
 }
 
 template<typename T>
-bool LinkedList<T>::RemoveLast() {
+inline bool LinkedList<T>::RemoveLast() {
     if (this->_tail == nullptr) return false;
     delete this->_tail;
     this->_tail = this->_tail->prev;
@@ -62,7 +62,7 @@ bool LinkedList<T>::RemoveLast() {
 }
 
 template<typename T>
-bool LinkedList<T>::Remove(T object) {
+inline bool LinkedList<T>::Remove(T object) {
     if (this->_size < 1 ) return false;
     if (this->_head == nullptr) throw std::out_of_range("LinkedList::Remove: nullptr head bug");
     auto current_node = this->_head;
@@ -92,7 +92,7 @@ bool LinkedList<T>::Remove(T object) {
 }
 
 template<typename T>
-bool LinkedList<T>::Remove(DoublyNode<T> *node) {
+inline bool LinkedList<T>::Remove(DoublyNode<T> *node) {
     if (node == nullptr) return false;
     if (node->next == nullptr && node->prev == nullptr) return false;
     if (node->next == nullptr) this->RemoveFirst();
@@ -105,7 +105,7 @@ bool LinkedList<T>::Remove(DoublyNode<T> *node) {
 }
 
 template<typename T>
-long long LinkedList<T>::Find(T object) {
+inline long long LinkedList<T>::Find(T object) {
     auto current_node = this->_head;
     if (current_node == nullptr) return -1;
     for (unsigned int i = 0; i < this->_size; ++i) {
@@ -115,13 +115,13 @@ long long LinkedList<T>::Find(T object) {
 }
 
 template<typename T>
-T LinkedList<T>::First() const {
+inline T LinkedList<T>::First() const {
     if (this->_head == nullptr) throw std::out_of_range("LinkedList::First: First is nullptr");
     return this->_head->data;
 }
 
 template<typename T>
-T LinkedList<T>::Last() const {
+inline T LinkedList<T>::Last() const {
     if (this->_tail == nullptr) throw std::out_of_range("LinkedList::Last: Last is nullptr");
     return this->_tail->data;
 }

@@ -1,15 +1,13 @@
-#include "../../headers/Queue.h"
-
 
 
 template<typename T>
-Queue<T>::Queue(const std::initializer_list<T> init) {
+inline Queue<T>::Queue(const std::initializer_list<T> init) {
     for (auto i = 0; i < init.size(); ++i) this->Enqueue(init.begin()[i]);
 }
 
 
 template <typename T>
-void Queue<T>::Enqueue(T item) {
+inline void Queue<T>::Enqueue(T item) {
     auto target_node = new SinglyNode<T>;
     target_node->data = item;
     target_node->next = nullptr;
@@ -28,7 +26,7 @@ void Queue<T>::Enqueue(T item) {
 }
 
 template<typename T>
-T Queue<T>::Dequeue() {
+inline T Queue<T>::Dequeue() {
     if (this->head == nullptr) throw std::out_of_range("Queue::Dequeue : queue is empty");
     auto result = this->head->data;
     auto old_head = this->head;

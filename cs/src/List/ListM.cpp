@@ -1,23 +1,24 @@
+#include "../../headers/List.h"
 
 
 template<typename T>
-unsigned long List<T>::Size() const {
+inline unsigned long List<T>::Size() const {
     return this->_size;
 }
 
 template<typename T>
-unsigned long List<T>::capacity() const {
+inline unsigned long List<T>::capacity() const {
     return this->_capacity;
 }
 
 template<typename T>
-void List<T>::SetCapacity(const unsigned long new_capacity) {
+inline void List<T>::SetCapacity(const unsigned long new_capacity) {
     if (new_capacity < this->_size) throw std::runtime_error("New capacity can't be less than current size");
     this->_newMemory(new_capacity);
 }
 
 template<typename T>
-void List<T>::append(T item) {
+inline void List<T>::append(T item) {
     if (this->_capacity < this->_size + 1) {
         auto new_capacity = this->_capacity > 0 ? this->_capacity * 2 : 1;
         this->_newMemory(new_capacity);
@@ -27,7 +28,7 @@ void List<T>::append(T item) {
 }
 
 template<typename T>
-void List<T>::Swap(long long index1, long long index2) {
+inline void List<T>::Swap(long long index1, long long index2) {
     T temp = this[index1];
     this[index1] = this[index2];
     this[index2] = temp;
@@ -35,7 +36,7 @@ void List<T>::Swap(long long index1, long long index2) {
 
 
 template<typename T>
-void List<T>::_newMemory(const unsigned long new_size) {
+inline void List<T>::_newMemory(const unsigned long new_size) {
     if (new_size == this->_capacity) return;
     if (new_size < this->_size) throw std::runtime_error("New size can't be less than current size");
     auto new_array = new T[new_size];
@@ -48,7 +49,7 @@ void List<T>::_newMemory(const unsigned long new_size) {
 }
 
 template<typename T>
-List<T> List<T>::GetRange(const unsigned long start, const unsigned long count) const {
+inline List<T> List<T>::GetRange(const unsigned long start, const unsigned long count) const {
     if (start + count > this->_size) throw std::out_of_range("In List::GetRange");
     List<T> new_list(count);
     for (unsigned long i = start; i < start + count; ++i) {
@@ -58,7 +59,7 @@ List<T> List<T>::GetRange(const unsigned long start, const unsigned long count) 
 }
 
 template<typename T>
-void List<T>::Clear() {
+inline void List<T>::Clear() {
     delete[] this->_array;
     this->_array = nullptr;
     this->_size = 0;
@@ -66,7 +67,7 @@ void List<T>::Clear() {
 }
 
 template<typename T>
-long long List<T>::Binsearch(T item) const {
+inline long long List<T>::Binsearch(T item) const {
     if (this->_size == 0) return -1;
     unsigned long iterations = 0;
     for (unsigned long i = (this->_size - 1) / 2; iterations < this->_size; ++iterations) {
@@ -79,6 +80,6 @@ long long List<T>::Binsearch(T item) const {
 
 
 template<typename T>
-List<T>::~List() {
+inline List<T>::~List() {
     delete[] _array;
 }

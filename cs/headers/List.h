@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <ostream>
 #include <sstream>
-#include "../types.h"
+#include "General.h"
 #include "structs.h"
 
 
@@ -61,7 +61,7 @@ private:
     void _swap(long long index1, long long index2);
 };
 
-// #include "../src/List/list_inc.h"
+#include "../src/List/list_inc.h"
 
 #endif //LIST_H
 
