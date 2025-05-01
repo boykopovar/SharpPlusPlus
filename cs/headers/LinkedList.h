@@ -13,6 +13,8 @@ public:
     LinkedList() = default;
     LinkedList(std::initializer_list<T> init);
     LinkedList(const LinkedList<T> &) = delete;
+    ~LinkedList();
+
     LinkedList<T> &operator=(const LinkedList<T> &) = delete;
 
     void AddFirst(T object);

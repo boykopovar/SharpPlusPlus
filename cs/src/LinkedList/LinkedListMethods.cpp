@@ -8,6 +8,20 @@ LinkedList<T>::LinkedList(std::initializer_list<T> init) {
 }
 
 template<typename T>
+LinkedList<T>::~LinkedList() {
+    auto current = this->_head;
+    while (current != nullptr) {
+        auto next = current->next;
+        delete current;
+        current = next;
+    }
+
+    this->_head = nullptr;
+    this->_tail = nullptr;
+    this->_size = 0;
+}
+
+template<typename T>
 void LinkedList<T>::AddFirst(T object) {
     auto new_node = new DoublyNode<T>;
     new_node->data = object;
