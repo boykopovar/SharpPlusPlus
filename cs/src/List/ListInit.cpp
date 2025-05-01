@@ -1,4 +1,3 @@
-#include "../../headers/List.h"
 
 template<typename T>
 List<T>::List(const List &other) : _array(new T[other._capacity]), _size(other._size), _capacity(other._capacity){

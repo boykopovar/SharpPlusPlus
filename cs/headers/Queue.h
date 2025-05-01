@@ -1,6 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "../types.h"
 #include"structs.h"
 
 
@@ -20,5 +21,7 @@ private:
     SinglyNode<T>* head = nullptr;
     SinglyNode<T>* tail = nullptr;
 };
+
+#include "../src/Queue/queue_inc.h"
 
 #endif //QUEUE_H

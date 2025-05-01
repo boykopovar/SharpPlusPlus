@@ -2,8 +2,7 @@
 #define LINKEDLIST_H
 
 #include <ostream>
-
-#include "../src/general/cout_tools.h"
+#include "../types.h"
 #include"structs.h"
 
 
@@ -37,11 +36,12 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const LinkedList<U> &list);
 
 private:
-    T& _link_by_index(unsigned long long index) const;
+    [[nodiscard]] T& _link_by_index(unsigned long long index) const;
     DoublyNode<T>* _head = nullptr;
     DoublyNode<T>* _tail = nullptr;
     unsigned long long _size = 0;
 };
 
+#include "../src/LinkedList/linkedlist_inc.h"
 
 #endif //LINKEDLIST_H

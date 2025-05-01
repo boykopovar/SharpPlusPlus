@@ -1,5 +1,5 @@
-#ifndef LIST_INCLUDE_H
-#define LIST_INCLUDE_H
+#ifndef LIST_INC_H
+#define LIST_INC_H
 
 #include "ListCout.cpp"
 #include "ListInit.cpp"
@@ -7,4 +7,4 @@
 #include "ListOperators.cpp"
 #include "ListSort.cpp"
 
-#endif //LIST_INCLUDE_H
+#endif //LIST_INC_H

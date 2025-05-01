@@ -1,4 +1,3 @@
-#include "../../headers/List.h"
 
 template<>
 void List<int>::Sort(const SortType sort_type) { _sort(sort_type); }

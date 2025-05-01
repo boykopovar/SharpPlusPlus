@@ -4,5 +4,6 @@ project(SharpPlusPlus)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(${PROJECT_NAME}
+        cs/types.cpp
         main.cpp
 )

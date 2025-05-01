@@ -2,39 +2,23 @@
 #define CS_TOOLS_H
 
 #include <iostream>
-#include "src/String/string_include.h"
-#include "src/List/list_include.h"
-#include "src/Queue/queue_include.h"
-#include "src/BitArray/bitarray_include.h"
-#include "src/Nums.cpp"
-#include "src/LinkedList/linkedlist_include.h"
-#include "src/general/general_include.h"
+#include "headers/General.h"
+#include "headers/LinkedList.h"
+#include "headers/List.h"
+#include "headers/BitArray.h"
+#include "headers/Queue.h"
+#include "headers/string.h"
 
 
 template<typename T>
-void print(T&& last) {
+inline void print(T&& last) {
     std::cout<<last<<std::endl;
 }
 
 template <typename T, typename... Args>
-void print(T&& first, Args&&... args) {
+inline void print(T&& first, Args&&... args) {
     std::cout<<first<<' ';
     print(std::forward<Args>(args)...);
-}
-
-inline long long Binpow(const long long digit, long long exp, const long long mod)
-{
-    if (mod==0) throw std::invalid_argument("mod cannot be zero");
-    if (exp<0) throw std::invalid_argument("exp cannot be zero");
-    long long result = 1;
-    long long base = digit % mod;
-    while (exp > 0)
-    {
-        if (exp%2 == 1) result = result*base % mod;
-        base = base*base % mod;
-        exp/=2;
-    }
-    return result;
 }
 
 #ifdef _WIN32
