@@ -11,6 +11,15 @@ bool BitArray::operator[](const unsigned long long index) const {
     return this->_isReversed ? !bit : bit;
 }
 
+bool BitArray::operator==(const BitArray &other) const {
+    if (this->Size() != other.Size()) return false;
+    for (unsigned long long i = 0; i < this->Size(); ++i) {
+        if ((*this)[i] != other[i]) return false;
+    }
+    return true;
+}
+
+
 BitArray::BitReference &BitArray::BitReference::operator=(bool value) {
     if (this->_parent._isReversed) value = !value;
     const bool current_value = (this->_word >> this->_offset) & 1ULL;

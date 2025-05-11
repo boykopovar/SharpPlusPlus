@@ -6,6 +6,17 @@ inline T& LinkedList<T>::operator[](const long long index) {
 }
 
 template<typename T>
+inline LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& from) {
+    this->~LinkedList();
+    auto current = from._head;
+    while (current) {
+        this->AddLast(current->data);
+        current = current->next;
+    }
+    return *this;
+}
+
+template<typename T>
 inline T& LinkedList<T>::operator[](const long long index) const{
     return this->_link_by_index(index);
 }

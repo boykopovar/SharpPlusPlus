@@ -15,7 +15,7 @@ public:
     LinkedList(const LinkedList<T> &) = delete;
     ~LinkedList();
 
-    LinkedList<T> &operator=(const LinkedList<T> &) = delete;
+    LinkedList<T> &operator=(const LinkedList<T> &);
 
     void AddFirst(T object);
     void AddLast(T object);
@@ -24,10 +24,11 @@ public:
     bool RemoveLast();
     bool Remove(T object);
     bool Remove(DoublyNode<T>* node);
+    void Swap(unsigned long long index1, unsigned long long index2);
 
     long long Find(T object);
-    T First() const;
-    T Last() const;
+    [[nodiscard]] T First() const;
+    [[nodiscard]] T Last() const;
 
     T& operator[](long long index) const;
     T& operator[](long long index);

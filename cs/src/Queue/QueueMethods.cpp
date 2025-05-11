@@ -22,7 +22,7 @@ inline void Queue<T>::Enqueue(T item) {
         this->tail->next = target_node;
         this->tail = target_node;
     }
-
+    ++this->size;
 }
 
 template<typename T>
@@ -32,6 +32,7 @@ inline T Queue<T>::Dequeue() {
     auto old_head = this->head;
     this->head = this->head->next;
     delete old_head;
+    --this->size;
     return result;
 }
 

@@ -25,16 +25,19 @@ public:
     void SetCapacity(unsigned long new_capacity);
     long long Binsearch(T item) const;
     void Clear();
+    void Insert(T item, unsigned long index);
 
     void Sort(SortType sort_type = QuickSort);
     void Swap(long long index1, long long index2);
 
     T* begin() {return &this->_array[0];};
-    T* end() {return &this->_array[this->_size];};
-
+    T* end() {return &this->_array[this->_size];}
 
     T& operator[](long long index);
     const T& operator[](long long index) const;
+
+    bool operator==(const List& other) const;
+    bool operator!=(const List& other) const {return !this->operator==(other);}
 
     List<T> operator+(const List<T>& other) const;
     void operator+=(const List<T>& other);
@@ -60,6 +63,20 @@ private:
     void _sort(SortType sort_type);
     void _swap(long long index1, long long index2);
 };
+
+namespace std {
+    template<typename T>
+    struct hash<List<T>> {
+        unsigned long long operator()(const List<T>& list) const noexcept {
+            unsigned long long res_hash = 0;
+            std::hash<T> hasher;
+            for (unsigned long i = 0; i < list.Size(); ++i) {
+                res_hash ^= hasher(list[i]) + 0x9e3779b9 + (res_hash << 6) + (res_hash >> 2);
+            }
+            return res_hash;
+        }
+    };
+}
 
 #include "../src/List/list_inc.h"
 

@@ -125,3 +125,22 @@ inline T LinkedList<T>::Last() const {
     if (this->_tail == nullptr) throw std::out_of_range("LinkedList::Last: Last is nullptr");
     return this->_tail->data;
 }
+
+template<typename T>
+inline void LinkedList<T>::Swap(const unsigned long long index1, const unsigned long long index2) {
+    if (index1 < 0 || index2 < 0)throw std::out_of_range("LinkedList::Swap: index is negative");
+    if (this->Size() <2) throw std::out_of_range("LinkedList::Swap: size is less than 2");
+    if (index1 == index2) return;
+    if (index1>this->Size()-1 || index2>this->Size()-1) throw std::out_of_range("LinkedList::Swap: index is out of range");
+
+    DoublyNode<T>* first = this->_head;
+    DoublyNode<T>* second = this->_head;
+
+    for (unsigned long long i = 0; i < index1; ++i) first = first->next;
+    for (unsigned long long i = 0; i < index2; ++i) second = second->next;
+
+    T temp = first->data;
+    first->data = second->data;
+    second->data = temp;
+}
+

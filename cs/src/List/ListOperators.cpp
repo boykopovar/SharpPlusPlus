@@ -1,5 +1,16 @@
-#include "../../headers/List.h"
+// #include "../../headers/List.h"
 
+
+#include <iostream>
+
+template<typename T>
+inline bool List<T>::operator==(const List &other) const{
+    if (this->_size != other._size) return false;
+    for (unsigned long i = 0; i < this->_size; ++i) {
+        if (this->_array[i] != other._array[i]) return false;
+    }
+    return true;
+}
 
 template<typename T>
 inline List<T>& List<T>::operator=(const List<T> &other) {
@@ -19,6 +30,7 @@ inline List<T>& List<T>::operator=(const List<T> &other) {
 template <typename T>
 inline T& List<T>::operator[](long long index)
 {
+    //std::cout<< "index:" << index << "\nsize:" << this->_size << "\ncapacity:" << this->_capacity << std::endl;
     if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("[List] Index is out of range");
     return _array[index >= 0 ? index : this->_size+index];
 }
@@ -26,7 +38,7 @@ inline T& List<T>::operator[](long long index)
 template <typename T>
 inline const T& List<T>::operator[](long long index) const
 {
-    if (index >= this->_size || (index<0 && -index>this->_size-1))  throw std::out_of_range("[List const] Index is out of range");
+    if (index >= this->_capacity || (index<0 && -index>this->_size-1))  throw std::out_of_range("[List const] Index is out of range");
     return _array[index >= 0 ? index : this->_size+index];
 }
 

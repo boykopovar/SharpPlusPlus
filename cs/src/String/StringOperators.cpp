@@ -1,30 +1,31 @@
 #include "../../headers/string.h"
 
 
-string string::operator[](const long long index) const{
-    return string(this->_symbols[index]);
+String String::operator[](const long long index) const{
+    return String(this->_symbols[index]);
 }
 
-string string::operator+(const string& other) const {
-    return string(this->_symbols + other._symbols);
+String String::operator+(const String& other) const {
+    return String(this->_symbols + other._symbols);
 }
 
-void string::operator+=(const string& other) {
+void String::operator+=(const String& other) {
     this->_symbols += other._symbols;
 }
 
 
-bool string::operator==(const string& other) const {
+bool String::operator==(const String& other) const {
+    if (this->Size()!=other.Size()) return false;
     for (unsigned long i = 0; i<this->Size(); ++ i) {
         if (this->_symbols[i] != other._symbols[i]) return false;
     }
     return true;
 }
 
-string string::operator()(const unsigned long start, const long long size) const {
+String String::operator()(const unsigned long start, const long long size) const {
     return this->Substr(start, size);
 }
 
-string string::operator[](const Range range) const {
+String String::operator[](const Range range) const {
     return this->Substr(range.start, range.size);
 }

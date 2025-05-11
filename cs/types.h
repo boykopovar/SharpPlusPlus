@@ -6,6 +6,9 @@
 #include "../cs/headers/string.h"
 #include "../cs/headers/BitArray.h"
 #include "../cs/headers/Queue.h"
+#include "../cs/headers/SortedDictionary.h"
+#include "../cs/headers/Dictionary.h"
+#include "../cs/headers/HashSet.h"
 
 
 template<typename T>

@@ -5,6 +5,7 @@
 class BitArray {
 
 public:
+    explicit BitArray() = default;
     explicit BitArray(unsigned long long size, bool default_value=false);
     BitArray(std::initializer_list<bool> init);
 
@@ -20,7 +21,7 @@ public:
 
     [[nodiscard]] unsigned long long Size() const;
     [[nodiscard]] bool IsTrue(unsigned long long index) const;
-    [[nodiscard]] string ToString() const;
+    [[nodiscard]] String ToString() const;
 
     [[nodiscard]] unsigned long long ToNumber() const;
 
@@ -38,8 +39,12 @@ public:
 
     BitReference operator[](unsigned long long index);
     bool operator[](unsigned long long index) const;
+    bool operator==(const BitArray& other) const;
+    bool operator!=(const BitArray& other) const{return !this->operator==(other);}
     explicit operator bool() const{return this->HasTrue();}
     friend std::ostream& operator<<(std::ostream& os, const BitArray& bits) {return os<<bits.ToString();}
+
+    unsigned long long GetHash() const{return std::hash<String>()(this->ToString());}
 
 private:
     bool _isReversed = false;
@@ -52,5 +57,10 @@ private:
 
     List<unsigned long long> _numbers;
 };
+
+namespace std {
+    template<>
+    struct hash<BitArray> {unsigned long long operator()(const BitArray& bits) const noexcept {return bits.GetHash();}};
+}
 
 #endif //BITARRAY_H

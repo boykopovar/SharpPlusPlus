@@ -18,8 +18,8 @@ int main() {
 
     // === string example ===
     std::cout << " === string Example ===\n";
-    string a = "Hello";
-    string b = " мир!";
+    String a = "Hello";
+    String b = " мир!";
     std::cout << (a + b).Split() << '\n'; // ["Hello", "мир!"]
     std::cout<< a[0]<<'\n'; // H
     auto c = a + b + "!!";

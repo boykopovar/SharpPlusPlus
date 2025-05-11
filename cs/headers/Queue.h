@@ -15,8 +15,12 @@ public:
     void Enqueue(T item);
     T Dequeue();
 
+    bool IsEmpty() const {return this->size == 0;};
+    unsigned long long Size() const {return this->size;};
+
 
 private:
+    unsigned long long size = 0;
     SinglyNode<T>* head = nullptr;
     SinglyNode<T>* tail = nullptr;
 };

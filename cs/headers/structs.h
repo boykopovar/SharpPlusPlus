@@ -20,11 +20,19 @@ struct DoublyNode {
     DoublyNode* prev = nullptr;
 };
 
-    enum SortType {
-        QuickSort,
-        HeapSort,
-        MergeSort,
-        InterpolationSort,
-    };
+template <typename KeyType, typename T>
+struct BinaryNode {
+    KeyType key;
+    T data;
+    BinaryNode* left = nullptr;
+    BinaryNode* right = nullptr;
+};
+
+enum SortType {
+    QuickSort,
+    HeapSort,
+    MergeSort,
+    InterpolationSort,
+};
 
 #endif //STRUCTS_H

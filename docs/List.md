@@ -34,7 +34,6 @@
 
 ```c++
 #include "cs/types.h"
-#include <iostream>
 
 int main() {
     List<int> nums = {3, 1, 2};
@@ -52,7 +51,6 @@ int main() {
 
 ```c++
 #include "cs/types.h"
-#include <iostream>
 
 int main() {
     List<int> list = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

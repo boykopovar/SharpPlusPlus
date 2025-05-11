@@ -1,0 +1,6 @@
+#ifndef SORTEDDICTIONARY_INCLUDE_H
+#define SORTEDDICTIONARY_INCLUDE_H
+
+#include "SortedDictionaryMethods.cpp"
+
+#endif //SORTEDDICTIONARY_INCLUDE_H

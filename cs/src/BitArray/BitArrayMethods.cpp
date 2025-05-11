@@ -12,6 +12,7 @@ BitArray::BitArray(const unsigned long long size, const bool default_value) {
         (*this)[i] = default_value;
     }
 
+    if (default_value) this->_trueCount = size;
 }
 
 BitArray::BitArray(const std::initializer_list<bool> init) : BitArray(init.size(), false){
@@ -65,14 +66,14 @@ bool BitArray::IsTrue(const unsigned long long index) const {
     return (*this)[index];
 }
 
-string BitArray::ToString() const {
+String BitArray::ToString() const {
     const auto chars = new char[this->_bitsCount+1];
     unsigned long long i = 0;
     for (; i < this->_bitsCount; ++i) {
         chars[i] = static_cast<char>('0' + (*this)[i]);
     }
     chars[i] = '\0';
-    string result = chars;
+    String result = chars;
     delete[] chars;
     return result;
 }
@@ -84,3 +85,4 @@ unsigned long long BitArray::ToNumber() const {
     }
     return result;
 }
+

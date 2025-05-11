@@ -67,6 +67,11 @@ inline void List<T>::Clear() {
 }
 
 template<typename T>
+void List<T>::Insert(T item, unsigned long index) {
+
+}
+
+template<typename T>
 inline long long List<T>::Binsearch(T item) const {
     if (this->_size == 0) return -1;
     unsigned long iterations = 0;
