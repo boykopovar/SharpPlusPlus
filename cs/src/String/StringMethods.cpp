@@ -1,6 +1,7 @@
 #include "../../headers/string.h"
 
 
+
 unsigned long String::Size() const {
     return this->_symbols.Size();
 }
@@ -55,7 +56,7 @@ String String::Substr(const unsigned long start, const long long size) const {
 //     return tokens;
 // }
 
-List<String> String::Split(String delim) const
+List<String> String::Split(const String& delim) const
 {
     if (delim.Size() == 0) throw std::runtime_error("string::Split: Delimiter cannot be empty");
     List<String> tokens;
@@ -88,6 +89,25 @@ String& String::Strip() {
     return *this;
 }
 
+bool String::IsNumber() const
+{
+    const auto c_str = this->c_str();
+
+    for (unsigned long long i = 0; true; ++i)
+    {
+        const auto& c = c_str[i];
+        if (c == '\0') break;
+        if (!isdigit(c))
+        {
+            delete[] c_str;
+            return false;
+        }
+    }
+
+    delete[] c_str;
+    return true;
+}
+
 long double String::ToDouble() const {
     long double result = 0.0;
     long double sign = 1.0;
@@ -113,6 +133,12 @@ long double String::ToDouble() const {
     }
     return sign * result;
 }
+
+long long String::ToInt() const
+{
+    return static_cast<long long>(this->ToDouble());
+}
+
 
 void String::_fromLongDouble(long double number) {
     if (number == 0.0L) {

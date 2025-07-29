@@ -5,23 +5,20 @@
 
 template<typename T>
 inline std::ostream& no_marks_list_out(std::ostream& out, const T& list) {
-    out<<'[';
     for(int i = 0; i < list.Size(); ++i) {
         out <<list[i];
         if (i!= list.Size()-1) out<< ',' << ' ';
     }
-    return out << ']';
+    return out;
 }
-
 
 template<typename T>
 inline std::ostream& single_mark_list_out(std::ostream& out, const T& list) {
-    out<<'[';
     for(int i = 0; i < list.Size(); i++) {
         out << '\''<<list[i]<<'\'';
         if (i!= list.Size()-1) out<< ',' << ' ';
     }
-    return out << ']';
+    return out;
 }
 
 inline long long IntPow(const long long base, const long long exp) {

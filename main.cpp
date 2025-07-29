@@ -1,8 +1,11 @@
 #include "cs/types.h"
 
 int main() {
-    Dictionary<int, String> dict;
-    dict[123] = "привет";
-    dict[321] = "hello";
-    std:: cout << dict[123] << '\n';
+    Dictionary<DateTime, String> dict;
+
+    dict[DateTime::Now()] = "тест";
+    dict[DateTime(1, 1, 1970)] = "qwer";
+
+    std::cout << DateTime("12.12.2012 12:12:12").ToString(false) << '\n';
+    std::cout << String("qwe").Split();
 }

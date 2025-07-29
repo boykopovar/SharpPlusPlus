@@ -7,21 +7,26 @@
 
 class String {
 public:
-    String() {}
-
+    String() = default;
     String(const char* text);
+
     explicit String(const char32_t* text);
     explicit String(char32_t c);
+
+    explicit String(const long double number){this->_fromLongDouble(number);}
+    explicit String(const long long number){this->_fromLongDouble(static_cast<long double>(number));}
+    explicit String(const int number){this->_fromLongDouble(number);}
+    explicit String(const unsigned long long number){this->_fromLongDouble(number);}
 
     // explicit String(const long double number) {this->_fromLongDouble(number);}
     // explicit String(const double number){this->_fromLongDouble(number);}
     // explicit String(const int number){this->_fromLongDouble(number);}
     // explicit String(const long long number){this->_fromLongDouble(number);}
 
-
     [[nodiscard]] char* c_str() const;
-    [[nodiscard]] List<String> Split(String delim = " ") const;
+    [[nodiscard]] List<String> Split(const String& delim = " ") const;
     String& Strip();
+    [[nodiscard]] bool IsNumber() const;
 
     [[nodiscard]] long long Find(String sub, unsigned long start = 0) const;
     [[nodiscard]] unsigned long Size() const;
@@ -44,14 +49,17 @@ public:
 
     friend std::ostream& operator<<(std::ostream &out, const String &str);
     friend std::ostream& operator<<(std::ostream &out, const List<String>& list);
-    unsigned long long GetHash() const {return std::hash<List<char32_t>>()(this->_symbols);}
+    [[nodiscard]] unsigned long long GetHash() const {return std::hash<List<char32_t>>()(this->_symbols);}
 
-    long double ToDouble() const;
+    [[nodiscard]] long double ToDouble() const;
+    [[nodiscard]] long long ToInt() const;
 
 
 private:
     List<char32_t> _symbols;
     List<char32_t> _chars_to_list32(const char* chars);
+    List<char*> _c_strs_list;
+
     void _fromLongDouble(long double number);
 
     explicit String(const List<char32_t>& text);
