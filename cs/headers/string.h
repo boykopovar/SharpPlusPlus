@@ -9,6 +9,7 @@ class String {
 public:
     String() = default;
     String(const char* text);
+    String (const std::string& s) {this->_symbols = _chars_to_list32(s.c_str());}
 
     explicit String(const char32_t* text);
     explicit String(char32_t c);

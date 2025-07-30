@@ -4,9 +4,26 @@
 #include "string.h"
 #include <ctime>
 
+
+struct TimeObject
+{
+    unsigned short hours, minutes, seconds;
+    bool operator<(const TimeObject &other) const{return hours < other.hours || (hours == other.hours && minutes < other.minutes) || (hours == other.hours && minutes == other.minutes && seconds < other.seconds);}
+
+    bool operator==(const TimeObject &other) const{return hours == other.hours && minutes == other.minutes && seconds == other.seconds;}
+    bool operator!=(const TimeObject &other) const {return !((*this)==other);}
+
+    bool operator<=(const TimeObject &other) const {return (*this) == other || (*this) < other;}
+    bool operator>=(const TimeObject &other) const {return !((*this) < other);}
+    bool operator >(const TimeObject &other) const {return !((*this) <= other);}
+};
+
+
 class DateTime {
 public:
-    DateTime(unsigned long long int day, unsigned long long int month, long long int year, unsigned short hours = 0, unsigned short minutes = 0, unsigned short seconds = 0);
+    DateTime(long long int year, unsigned long long int month, unsigned long long int day, unsigned short hours = 0, unsigned short minutes = 0, unsigned short seconds = 0);
+    DateTime(long long int year, unsigned long long int month, unsigned long long int day, TimeObject time);
+
     explicit DateTime(const String& date_str);
 
     DateTime() : DateTime(Now()) {}
@@ -16,9 +33,9 @@ public:
     [[nodiscard]] unsigned long long Month() const{return this->_month;}
     [[nodiscard]] unsigned long long Year() const{return this->_year;}
 
-    [[nodiscard]] unsigned long long Hours() const{return this->_hours;}
-    [[nodiscard]] unsigned long long Minutes() const{return this->_minutes;}
-    [[nodiscard]] unsigned long long Seconds() const{return this->_seconds;}
+    [[nodiscard]] unsigned short Hours() const{return this->_time.hours;}
+    [[nodiscard]] unsigned short Minutes() const{return this->_time.minutes;}
+    [[nodiscard]] unsigned short Seconds() const{return this->_time.seconds;}
 
     [[nodiscard]] DateTime NextDay() const;
     [[nodiscard]] DateTime PreviousDay() const;
@@ -43,8 +60,10 @@ public:
 
 
 private:
-    unsigned long long int _day, _month, _hours, _minutes, _seconds;
+    unsigned long long int _day, _month;
     long long int _year;
+
+    TimeObject _time;
 
     [[nodiscard]] unsigned long long int _daysInMonth(unsigned long long int month_number) const;
     static long long int _leapCount(long long int year);
@@ -57,7 +76,7 @@ private:
 
 namespace std {
     template<>
-    struct hash<DateTime> {unsigned long long operator()(const DateTime& date) const noexcept {return date.Day() * 123 + date.Month() * 23 + date.Year() * 13;}};
+    struct hash<DateTime> {unsigned long long operator()(const DateTime& date) const noexcept {return date.ToString().GetHash();}};
 }
 
 

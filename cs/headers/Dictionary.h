@@ -64,7 +64,7 @@ public:
     void Clear(){this->_size = 0; this->_buckets.Clear();}
 
     friend std::ostream& operator<<(std::ostream& os, const Dictionary<KeyType, ValueType>& dict) {return os<< dict.ToList();}
-    unsigned long long GetHash() const{return std::hash<List<List<Pair<KeyType, ValueType>>>>()(this->_buckets);}
+    [[nodiscard]] unsigned long long GetHash() const{return std::hash<List<List<Pair<KeyType, ValueType>>>>()(this->_buckets);}
 
 private:
 

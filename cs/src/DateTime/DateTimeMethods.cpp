@@ -1,15 +1,24 @@
 #include "../../headers/DateTime.h"
 
 
-DateTime::DateTime(const unsigned long long int day, const unsigned long long int month, const long long int year, const unsigned short hours, const unsigned short minutes , const unsigned short seconds)
+DateTime::DateTime(const long long int year, const unsigned long long int month, const unsigned long long int day, const unsigned short hours, const unsigned short minutes , const unsigned short seconds)
 {
     this->_day = day;
     this->_month = month;
     this->_year = year;
+    this->_time = {hours, minutes, seconds};
 
-    this->_hours = hours;
-    this->_minutes = minutes;
-    this->_seconds = seconds;
+    this->_check_date_part();
+    this->_check_time_part();
+}
+
+
+DateTime::DateTime(const long long int year, const unsigned long long int month, const unsigned long long int day, TimeObject time)
+{
+    this->_day = day;
+    this->_month = month;
+    this->_year = year;
+    this->_time = time;
 
     this->_check_date_part();
     this->_check_time_part();
@@ -27,7 +36,7 @@ DateTime::DateTime(const String& date_str)
         const auto& part = date_parts[str_i];
         for (long long i =0;i<part.Size();++i) {
             if (!part[i].IsNumber() && !(i==0 && part[i] == "-" && part.Size()>1)) {
-                throw std::invalid_argument("Неверная дата");
+                throw std::invalid_argument("Invalid date");
             }
         }
     }
@@ -52,9 +61,9 @@ DateTime::DateTime(const String& date_str)
             }
         }
 
-        this->_hours = time_parts[0].ToInt();
-        this->_minutes = time_parts[1].ToInt();
-        this->_seconds = time_parts[2].ToInt();
+        this->_time.hours = time_parts[0].ToInt();
+        this->_time.minutes = time_parts[1].ToInt();
+        this->_time.seconds = time_parts[2].ToInt();
 
         this->_check_time_part();
     }
@@ -68,9 +77,9 @@ DateTime DateTime::Now()
     const std::tm* tm = std::localtime(&t);
 
     return {
-        static_cast<unsigned long long int>(tm->tm_mday),
-        static_cast<unsigned long long int>(tm->tm_mon+1),
         tm->tm_year+1900,
+        static_cast<unsigned long long int>(tm->tm_mon+1),
+        static_cast<unsigned long long int>(tm->tm_mday),
         static_cast<unsigned short>(tm->tm_hour),
         static_cast<unsigned short>(tm->tm_min),
         static_cast<unsigned short>(tm->tm_sec)
@@ -81,11 +90,11 @@ DateTime DateTime::NextDay() const{
     if (IsEndOfYear()) {
         long long int new_year = _year + 1;
         if (_year == -1) new_year = 1;
-        return {1, 1, new_year};
+        return {new_year, 1, 1, this->_time};
     }
-    if (IsEndOfMonth()) return {1, _month + 1, _year};
+    if (IsEndOfMonth()) return {_year, _month + 1, 1, this->_time};
 
-    return {_day + 1, _month, _year};
+    return {_year, _month, _day + 1, this->_time};
 }
 
 DateTime DateTime::PreviousDay() const
@@ -93,10 +102,10 @@ DateTime DateTime::PreviousDay() const
     if (_day == 1 && _month ==1) {
         long long int new_year = _year - 1;
         if (_year ==1) new_year = -1;
-        return {_daysInMonth(1), 1, new_year};
+        return {new_year, 1, _daysInMonth(1), this->_time};
     }
-    if (_day ==1) return {_daysInMonth(_month-1), _month - 1, _year};
-    return {_day - 1, _month, _year};
+    if (_day ==1) return {_year, _month - 1, _daysInMonth(_month-1), this->_time};
+    return {_year, _month, _day - 1, this->_time};
 }
 
 DateTime DateTime::NextYear() const{
@@ -106,7 +115,7 @@ DateTime DateTime::NextYear() const{
     if (this->_year == -1) new_year = 1;
     if (this->_day == 29 && this->_month == 2) new_day = 28;
 
-    return {new_day, this->_month, new_year};
+    return {new_year, _month, new_day, this->_time};
 }
 
 
@@ -133,9 +142,9 @@ String DateTime::ToString(const bool need_time, const String& delim) const
     auto date_str = day_str + delim + month_str + delim + year_str;
     if (need_time)
     {
-        const String minutes = this->_minutes>9 ? String(this->_minutes) : String(0) + String(this->_minutes);
-        const String hours = this->_hours>9 ? String(this->_hours) : String(0) + String(this->_hours);
-        const String seconds = this->_seconds>9 ? String(this->_seconds) : String(0) + String(this->_seconds);
+        const String minutes = this->_time.minutes>9 ? String(this->_time.minutes) : String(0) + String(this->_time.minutes);
+        const String hours = this->_time.hours>9 ? String(this->_time.hours) : String(0) + String(this->_time.hours);
+        const String seconds = this->_time.seconds>9 ? String(this->_time.seconds) : String(0) + String(this->_time.seconds);
 
         date_str = date_str + " " + hours + ":" + minutes + ":" + seconds;
     }
@@ -175,18 +184,6 @@ unsigned long long int DateTime::_daysInMonth(const unsigned long long int month
 unsigned long long int DateTime::_daysOfCurrentYear() const {
     unsigned long long int abs_days_of_current_year = 0;
 
-    // if (this->month > 1) abs_days_of_current_year += _daysInMonth(1);
-    // if (this->month > 2) abs_days_of_current_year += _daysInMonth(2);
-    // if (this->month > 3) abs_days_of_current_year += _daysInMonth(3);
-    // if (this->month > 4) abs_days_of_current_year += _daysInMonth(4);
-    // if (this->month > 5) abs_days_of_current_year += _daysInMonth(5);
-    // if (this->month > 6) abs_days_of_current_year += _daysInMonth(6);
-    // if (this->month > 7) abs_days_of_current_year += _daysInMonth(7);
-    // if (this->month > 8) abs_days_of_current_year += _daysInMonth(8);
-    // if (this->month > 9) abs_days_of_current_year += _daysInMonth(9);
-    // if (this->month > 10) abs_days_of_current_year += _daysInMonth(10);
-    // if (this->month > 11) abs_days_of_current_year += _daysInMonth(11);
-
     // for (int i = 1; i<this->month; ++i) {
     //     if (this->month >i) abs_days_of_current_year += _daysInMonth(i);
     // }
@@ -217,8 +214,6 @@ unsigned long long int DateTime::DaysTillBirthday(const DateTime& birthday) cons
 }
 
 
-
-
 long long int DateTime::_leapCount(const long long int year) {
     const long long int leap_count = year/4 - year/100 + year/400;
     return leap_count < 0 ? -leap_count : leap_count;
@@ -227,22 +222,22 @@ long long int DateTime::_leapCount(const long long int year) {
 void DateTime::_check_date_part() const
 {
     if (this->_year == 0 || this->_month < 1 || this->_month > 12) {
-        throw std::invalid_argument("Неверная дата");
+        throw std::invalid_argument("Invalid date");
     }
 
     if (this->_day > this->DaysInMonth()) {
-        throw std::invalid_argument("Неверное количество дней");
+        throw std::invalid_argument("Invalid days count");
     }
 }
 
 void DateTime::_check_time_part() const
 {
-    if (this->_hours >=24 || this->_minutes >= 60 || this->_seconds >= 60) {
-        throw std::invalid_argument("Неверное время");
+    if (this->_time.hours >=24 || this->_time.minutes >= 60 || this->_time.seconds >= 60) {
+        throw std::invalid_argument("Invalid time");
     }
 
-    if (this->_hours <0 || this->_minutes < 0 || this->_seconds < 0) {
-        throw std::invalid_argument("Неверное время");
+    if (this->_time.hours <0 || this->_time.minutes < 0 || this->_time.seconds < 0) {
+        throw std::invalid_argument("Invalid time");
     }
 }
 

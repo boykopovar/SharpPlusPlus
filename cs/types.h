@@ -23,6 +23,22 @@ inline void print(T&& first, Args&&... args) {
     print(std::forward<Args>(args)...);
 }
 
+inline String input() {
+    std::string input;
+    std::getline(std::cin, input);
+    return input;
+}
+
+template <typename T, typename... Args>
+inline String input(T&& first, Args&&... args) {
+    std::cout<<first<<' ';
+
+    if constexpr (sizeof...(args) > 0) print(std::forward<Args>(args)...);
+    return input();
+}
+
+
+
 inline long long Binpow(const long long digit, long long exp, const long long mod)
 {
     if (mod==0) throw std::invalid_argument("mod cannot be zero");

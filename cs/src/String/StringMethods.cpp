@@ -129,7 +129,7 @@ long double String::ToDouble() const {
             }
             else result = result * 10.0 + digit;
         }
-        else throw std::invalid_argument("Invalid character for double");
+        else throw std::invalid_argument("Invalid character for number");
     }
     return sign * result;
 }
