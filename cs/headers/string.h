@@ -19,11 +19,6 @@ public:
     explicit String(const int number){this->_fromLongDouble(number);}
     explicit String(const unsigned long long number){this->_fromLongDouble(number);}
 
-    // explicit String(const long double number) {this->_fromLongDouble(number);}
-    // explicit String(const double number){this->_fromLongDouble(number);}
-    // explicit String(const int number){this->_fromLongDouble(number);}
-    // explicit String(const long long number){this->_fromLongDouble(number);}
-
     [[nodiscard]] char* c_str() const;
     [[nodiscard]] List<String> Split(const String& delim = " ") const;
     String& Strip();

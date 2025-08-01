@@ -14,7 +14,7 @@
 
 template<typename T>
 inline void print(T&& last) {
-    std::cout<<last<<std::endl;
+    std::cout << last << '\n';
 }
 
 template <typename T, typename... Args>

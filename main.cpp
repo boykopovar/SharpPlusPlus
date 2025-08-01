@@ -1,6 +1,5 @@
 #include "cs/types.h"
 
-
 int main() {
     Dictionary<DateTime, String> dict;
 
