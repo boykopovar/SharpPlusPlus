@@ -139,6 +139,16 @@ long long String::ToInt() const
     return static_cast<long long>(this->ToDouble());
 }
 
+void String::Append(const char* symbols, const unsigned long long size)
+{
+    const auto c_str = new char[size+1];
+    for (unsigned long long i = 0; i < size; ++i) c_str[i] = symbols[i];
+    c_str[size] = '\0';
+
+    (*this) += c_str;
+    delete[] c_str;
+}
+
 
 void String::_fromLongDouble(long double number) {
     if (number == 0.0L) {
@@ -148,7 +158,7 @@ void String::_fromLongDouble(long double number) {
     const bool is_negative = number < 0.0L;
     if (is_negative) number = -number;
 
-    long long int_part = static_cast<long long>(number);
+    auto int_part = static_cast<long long>(number);
     long double double_part = number - int_part;
 
     List<char32_t> int_symbols;

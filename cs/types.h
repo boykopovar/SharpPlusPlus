@@ -1,9 +1,10 @@
 #ifndef CS_TOOLS_H
 #define CS_TOOLS_H
 
+
 #include <iostream>
 #include "../cs/headers/LinkedList.h"
-#include "../cs/headers/string.h"
+#include "../cs/headers/String.h"
 #include "../cs/headers/DateTime.h"
 #include "../cs/headers/BitArray.h"
 #include "../cs/headers/Queue.h"

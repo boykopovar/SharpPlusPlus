@@ -2,9 +2,10 @@
 
 int main() {
     Dictionary<DateTime, String> dict;
+    dict[DateTime::Now()] = "тест";
+    std::cout << dict[DateTime::Now()] << '\n';
 
-    dict[DateTime(2025, 07, 30)] = "\nкак сам";
-    dict[DateTime::Now()] = "тест\n";
-
-    print(dict[{input("Введите год: ").ToInt(), 07, 30}]);
+    String a = "тест";
+    a.Append("тест");
+    std::cout << a;
 }

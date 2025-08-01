@@ -36,6 +36,9 @@ public:
     String operator+(const String& other) const;
     void operator+=(const String& other);
 
+    void Append(const String& other) {return (*this) += other;}
+    void Append(const char* symbols, unsigned long long size);
+
     bool operator==(const String& other) const;
     bool operator!=(const String& other) const{return !(*this == other);};
     bool operator>(const String& other) const{return this->Size()>other.Size();}

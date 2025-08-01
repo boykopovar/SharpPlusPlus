@@ -1,6 +1,7 @@
 #ifndef BITARRAY_H
 #define BITARRAY_H
-#include "string.h"
+
+#include "String.h"
 
 class BitArray {
 
